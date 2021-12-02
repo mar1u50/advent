@@ -26,12 +26,15 @@ data class UpCommand(private val step: Int) : Command {
     override fun apply(position: Position) = Position(position.horizontalPosition, position.depth - step)
 }
 
-private fun navigate(commands: List<Command>): Position {
+class Submarine {
     var position = Position(0, 0)
-    commands.forEach {
-        position = it.apply(position)
+
+    fun navigate(commands: List<Command>): Position {
+        commands.forEach {
+            position = it.apply(position)
+        }
+        return position
     }
-    return position
 }
 
 fun parseCommands(commandLines: List<String>): List<Command> = commandLines
@@ -59,7 +62,7 @@ class Day2DiveTest {
 
     @Test
     fun testDay2Navigate() {
-        val position = navigate(parseCommands(day2Input))
+        val position = Submarine().navigate(parseCommands(day2Input))
         assertThat(position.depth).isEqualTo(10)
         assertThat(position.horizontalPosition).isEqualTo(15)
         assertThat(position.multiplication()).isEqualTo(150)
