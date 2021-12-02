@@ -29,12 +29,7 @@ data class UpCommand(private val step: Int) : Command {
 class Submarine {
     var position = Position(0, 0)
 
-    fun navigate(commands: List<Command>): Position {
-        commands.forEach {
-            position = it.apply(position)
-        }
-        return position
-    }
+    fun navigate(commands: List<Command>) = commands.fold(position) { p: Position, c: Command -> c.apply(p) }
 }
 
 fun parseCommands(commandLines: List<String>): List<Command> = commandLines
