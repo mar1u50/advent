@@ -2,7 +2,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.nield.kotlinstatistics.median
 import java.nio.file.Paths
-import java.util.stream.IntStream
 import kotlin.math.abs
 import kotlin.math.round
 
