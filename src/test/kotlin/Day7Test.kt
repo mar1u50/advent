@@ -1,5 +1,5 @@
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import org.nield.kotlinstatistics.median
 import java.nio.file.Paths
 import kotlin.math.abs
@@ -15,7 +15,7 @@ private fun part1() {
     println("Part 1 - ${computeOptimumFuelPart1(parsePositions(day7Input))}")
 }
 
-fun stepCostP2(n: Int) = n * (n + 1) / 2;
+fun stepCostP2(n: Int) = n * (n + 1) / 2
 
 fun computeFuelPart2(positions: List<Int>, refPos: Int) =
     positions.sumOf { stepCostP2(abs(it - refPos)) }
@@ -38,7 +38,7 @@ fun main() {
 }
 
 class Day7Test {
-    val CRAB_HORRIZ_POSITIONS = "16,1,2,0,4,2,7,1,2,14"
+    private val CRAB_HORRIZ_POSITIONS = "16,1,2,0,4,2,7,1,2,14"
 
     @Test
     fun testParsePositions() {

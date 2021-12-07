@@ -1,5 +1,5 @@
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import java.nio.file.Paths
 import java.util.LinkedList
 
