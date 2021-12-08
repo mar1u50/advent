@@ -28,6 +28,46 @@ fun day8part1() {
     println(countUniqueNumber(day8Input))
 }
 
+// Part2
+fun part2Line(trainData: List<String>, evalData: List<String>): Int {
+    val one = trainData.first { it.length == 2 }.toSortedSet()
+    val four = trainData.first { it.length == 4 }.toSortedSet()
+    val seven = trainData.first { it.length == 3 }.toSortedSet()
+    val eight = trainData.first { it.length == 7 }.toSortedSet()
+    val three = trainData.filter { it.length == 5 }.first { it.toSortedSet().containsAll(one) }.toSortedSet()
+    val six = trainData.filter { it.length == 6 }.first { !it.toSortedSet().containsAll(one) }.toSortedSet()
+    val nine = trainData.filter { it.length == 6 }.first { it.toSortedSet().containsAll(three) }.toSortedSet()
+    val zero = trainData.filter { it.length == 6 }.filter { !it.toSortedSet().containsAll(three) }
+        .first { it.toSortedSet().containsAll(one) }
+        .toSortedSet()
+    val five = trainData.filter { it.length == 5 }.first { six.containsAll(it.toSortedSet()) }.toSortedSet()
+    val two = trainData.filter { it.length == 5 }.first { it.toSortedSet() != five && it.toSortedSet() != three }
+        .toSortedSet()
+
+    val theMap = mapOf(
+        one to 1,
+        two to 2,
+        three to 3,
+        four to 4,
+        five to 5,
+        six to 6,
+        seven to 7,
+        eight to 8,
+        nine to 9,
+        zero to 0
+    )
+
+    assertThat(theMap.values.size).isEqualTo(10)
+
+    println("testing $trainData")
+    return evalData.map { theMap[it.toSortedSet()].toString() }.joinToString("").toInt()
+}
+
+fun day8part2() {
+    val day8Input = Paths.get("src", "test", "kotlin", "day8.txt").toFile().readLines()
+    println(day8Input.sumOf { line -> parseLine(line).let { part2Line(it.first, it.second) } })
+}
+
 class Day8 {
     val puzzleTestInput = """be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
@@ -62,5 +102,28 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
     @Test
     fun testCountUniqueNumber() {
         assertThat(countUniqueNumber(getObservedLines(puzzleTestInput))).isEqualTo(26)
+    }
+
+    @Test
+    fun testPart2Line() {
+        assertThat(
+            parseLine("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf")
+                .let { part2Line(it.first, it.second) }
+        ).isEqualTo(5353)
+
+        assertThat(
+            parseLine("edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc")
+                .let { part2Line(it.first, it.second) }
+        ).isEqualTo(9781)
+
+        assertThat(
+            parseLine("bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef")
+                .let { part2Line(it.first, it.second) }
+        ).isEqualTo(1625)
+    }
+
+    @Test
+    fun testPart2() {
+        day8part2();
     }
 }
