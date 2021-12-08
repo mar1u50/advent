@@ -59,7 +59,6 @@ fun part2Line(trainData: List<String>, evalData: List<String>): Int {
 
     assertThat(theMap.values.size).isEqualTo(10)
 
-    println("testing $trainData")
     return evalData.map { theMap[it.toSortedSet()].toString() }.joinToString("").toInt()
 }
 
