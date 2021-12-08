@@ -59,7 +59,7 @@ fun part2Line(trainData: List<String>, evalData: List<String>): Int {
 
     assertThat(theMap.values.size).isEqualTo(10)
 
-    return evalData.map { theMap[it.toSortedSet()].toString() }.joinToString("").toInt()
+    return evalData.joinToString("") { theMap[it.toSortedSet()].toString() }.toInt()
 }
 
 fun day8part2() {
