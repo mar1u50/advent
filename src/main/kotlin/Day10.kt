@@ -23,7 +23,7 @@ fun part2(lines: List<String>) {
         .map { it.score }
         .sorted()
 
-    println("Part1: ${scores[scores.size / 2]}")
+    println("Part2: ${scores[scores.size / 2]}")
 }
 
 val parenthesis = mapOf(
