@@ -1,7 +1,7 @@
 import java.nio.file.Paths
 
 fun main() {
-    val input = Paths.get("src", "main", "kotlin", "day10.txt").toFile().readLines()
+    val input = Paths.get("src", "test", "kotlin", "day10.txt").toFile().readLines()
     part1(input)
     part2(input)
 }
