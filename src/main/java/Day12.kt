@@ -26,23 +26,23 @@ fun toGraph(lines: List<String>): Map<String, List<String>> {
     return graph
 }
 
-class Path(node: String, pathElements: List<String> = listOf(), lowercaseElents: Set<String> = setOf()) {
+class Path(node: String, pathElements: List<String> = listOf(), lowercaseElements: Set<String> = setOf()) {
 
     val lastElement: String = node
     private val pathElements: List<String>
-    private val lowercaseElents: Set<String>
+    private val lowercaseElements: Set<String>
 
     fun add(target: String): Path {
-        return Path(target, pathElements, lowercaseElents)
+        return Path(target, pathElements, lowercaseElements)
     }
 
     fun contains(element: String): Boolean {
-        return lowercaseElents.contains(element)
+        return lowercaseElements.contains(element)
     }
 
     init {
         this.pathElements = pathElements + node
-        this.lowercaseElents = if (node == node.lowercase()) lowercaseElents + node else lowercaseElents
+        this.lowercaseElements = if (node == node.lowercase()) lowercaseElements + node else lowercaseElements
     }
 }
 
